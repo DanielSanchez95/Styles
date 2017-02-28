@@ -1,0 +1,164 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+
+        <meta charset="UTF-8" />
+        <title>Formulario de registro</title>
+
+        <link rel="icon" type="image/png" href="Resources/Utilerias/img/logoFavicon.ico" />
+
+        <link type="text/css" rel="stylesheet" href="Resources/Utilerias/css/bootstrap.css" />
+        <link type="text/css" rel="stylesheet" href="Resources/Utilerias/css/formValidation.min.css" />
+        <link type="text/css" rel="stylesheet" href="Resources/Utilerias/css/styleRegistro.css" />
+
+
+        <!--****************************************************************************************************************************-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+
+
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" /><!--css materialize-->
+        <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/><!--link iconos-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css" />
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+
+    </h:head>
+    <h:body>
+        <div class="fixed-action-btn horizontal click-to-toggle" style="bottom: 45px; right: 24px;">
+            <a class="btn-floating btn-large red">
+                <i class="material-icons">menu</i>
+            </a>
+            <ul>
+                <li><center><a href="index.xhtml" class="btn-floating yellow glyphicon glyphicon-home"></a></center></li>
+                <li><center><a href="quienesSomos.xhtml" class="btn-floating green glyphicon glyphicon-question-sign"></a></center></li>
+                <li><center><a href="servicios.xhtml" class="btn-floating blue glyphicon glyphicon-scissors"></a></center></li>
+                <li><center><a href="contactenos.xhtml" class="btn-floating pink glyphicon glyphicon-headphones"></a></center></li>
+                <li><center><a href="2niciarSesion.xhtml" class="btn-floating orange glyphicon glyphicon-user"></a></center></li>
+            </ul>
+        </div>
+        <div class="wrapper">
+
+            <div class="container">
+
+
+                <h1 class="h1" style="color: white;"><strong>Registro de Usuario</strong></h1>
+
+                <p style="color: white;">Información para el diligenciamiento de registro de Usuario</p>
+                <p style="color: white;">Todos los campos son obligatorios</p>
+
+                <center>
+
+                    <ul class="nav nav-tabs nav-justified">                    
+                        <li><a data-toggle="tab" href="#menu1">Cliente</a></li>
+                        <li><a data-toggle="tab" href="#menu2">Vacante</a></li>
+                    </ul>
+
+                </center>
+
+                <div class="tab-content">
+                    <div id="menu1" class="tab-pane fade">
+                        <h3 style="color: white;">Cliente</h3>
+                        <p style="color: white;"></p>
+                        <div id="formulario">
+
+                            <div class="tab-content">
+                                <f:view>
+                                    <center>
+                                        <h:form style="position: relative; left: 0px;" >
+                                            <input type="Text" id="cedulaUsuario" name="cedulaUsuario"  placeholder="Documento" autofocus="true" tabindex="1" pattern="([0-9]{6,10})" title="El numero de cedula debe ser minímo de 6 caracteres y maxímo de 10 carecteres" required="true" />
+                                            <input type="text" id="nombre" name="nombre" placeholder="Nombre" tabindex="2"  pattern="[A-Z]{3,15}" title="Todos los caracteres deben ir en mayúscula, la cantidad de caracteres es de minimo3 y maximo 15" required="true" />
+                                            <input type="text" id="apellido" name="apellido" placeholder="Apellido" tabindex="3"   pattern="[A-Z]{3,15}" title="Todos los caracteres deben ir en mayúscula, la cantidad de caracteres es de minimo3 y maximo 15" required="true" />
+                                            <input value="fecha" type="date" id="fecha" name="fecha" required="true" />
+                                            <input type="tel" id="telefono" name="telefono" placeholder="Telefono" tabindex="4" pattern="([3]{1})+([0,1,2]{1})+([0,1,2,3,4,5]{1})+([0-9]{7})" title="El numero de telefono debe ser de 10 carecteres" required="true" />
+                                            <input type="email" id="correo" name="correo" placeholder="Correo" tabindex="5" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required="true" />
+                                            <input type="password" id="contrasena" name="contrasena" placeholder="Contraseña" tabindex="6" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,50}" required="true" ><br></br><span style="color: white;">La contraseña debe ser mínima de 8 caracteres y se DEBE componer de mínimo un número, una letra mayúscula y letras minúsculas.</span></input>
+                                            <br></br>
+                                            <br></br>
+                                            <br></br>
+
+
+                                            <h:commandButton value="Registrarse" action="#{controladorUsuario.registrarUsuario()}"  class="btn btn-primary" />   
+                                            <br></br>
+                                            <a href="2niciarSesion.xhtml" ><input type="button" value="Volver" src="2niciarSesion.xhtml" class="btn btn-danger" ></input></a>
+                                        </h:form>
+                                    </center>
+                                </f:view>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="menu2" class="tab-pane fade">
+                        <h3 style="color: white;">Vacante</h3>
+                        <p style="color: white;"></p>
+                        <div id="formulario">
+
+                            <div class="tab-content">
+                                <f:view>
+                                    <center>
+                                        <h:form style="position: relative; left: 0px;" >
+                                            <input type="Text" id="cedulaVacante" name="cedulaVacante"  placeholder="Documento" autofocus="true" tabindex="1" pattern="([0-9]{6,10})" title="El numero de cedula debe ser minímo de 6 caracteres y maxímo de 10 carecteres" required="true" />
+                                            <input type="text" id="nombreVacante" name="nombreVacante" placeholder="Nombre" tabindex="2"  pattern="[A-Z]{3,15}" title="Todos los caracteres deben ir en mayúscula, la cantidad de caracteres es de minimo3 y maximo 15" required="true" />
+                                            <input type="text" id="apellidoVacante" name="apellidoVacante" placeholder="Apellido" tabindex="3"   pattern="[A-Z]{3,15}" title="Todos los caracteres deben ir en mayúscula, la cantidad de caracteres es de minimo3 y maximo 15" required="true" />
+                                            <select id="especialidad" name="especialidad"  tabindex="4" class="form-control" style="width: 35%" >
+                                                <option value="Corte" disabled="true" selected="true" ></option>
+                                                <option value="Corte" >Corte</option>
+                                                <option value="Tinte" >Tinte</option>
+                                                <option value="Cepillado" >Cepillado</option>
+                                                <option value="Manicure" >Manicure</option>
+                                                <option value="Pedicure" >Pedicure</option>
+                                                <option value="Integral" >Integral</option>
+                                            </select>
+
+                                            <input type="tel" id="telefonoVacante" name="telefonoVacante" placeholder="Telefono" tabindex="5" pattern="([3]{1})+([0,1,2]{1})+([0,1,2,3,4,5]{1})+([0-9]{7})" title="El numero de telefono debe ser de 10 carecteres" required="true" />
+                                            <input type="email" id="correoVacante" name="correoVacante" placeholder="Correo" tabindex="6" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required="true" />
+                                            <input type="password" id="contrasenaVacante" name="contrasenaVacante" placeholder="Contraseña" tabindex="7" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,50}" required="true" ><br></br><span>La contraseña debe ser mínima de 8 caracteres y se DEBE componer de mínimo un número, una letra mayúscula y letras minúsculas.</span></input>
+                                            <br></br>
+                                            <br></br>
+                                            <br></br>
+
+
+                                            <h:commandButton value="Registrarse" action="#{controladorUsuario.registrarVacante()}"  class="btn btn-primary" />   
+                                            <br></br>
+                                            <a href="2niciarSesion.xhtml" ><input type="button" value="Volver" src="2niciarSesion.xhtml" class="btn btn-danger" ></input></a>
+                                        </h:form>
+                                    </center>
+                                </f:view>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div id="formulario">
+
+                <div class="tab-content">
+                    <br></br>   
+
+                    <br></br>                                
+
+
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+
+    </h:body>
+</html>
+

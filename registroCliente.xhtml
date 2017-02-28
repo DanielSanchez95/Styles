@@ -1,0 +1,119 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>Registrate como cliente</title>
+        <meta charset="utf-8" />
+        <link rel="icon" type="image/png" href="Resources/img/logoFavicon.ico"></link>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link href="Resources/iconos.css" rel="stylesheet"/><!--link iconos-->
+        <link rel="stylesheet" type="text/css" href="Resources/materialize/css/materialize.min.css"></link>
+        <link rel="stylesheet" type="text/css" href="Resources/estilosRegistro.css" />
+
+
+        <script src="Resources/materialize/js/materialize.js"></script>
+    </h:head>
+    <h:body>
+
+        <div id="todo">
+            <div class="row">
+                <h:form>
+                    <center><h2 style="color: black; " >Registro Usuario</h2></center>
+
+                    <c:if test="#{controladorUsuario.estadoU==1}">
+                        Usuario registrado correctamente!!!
+                    </c:if>
+
+                    <c:if test="#{controladorUsuario.estadoU==2}">
+                        Error al registrado usuario!!!
+                    </c:if>
+
+                    <div class="input-field col s6">
+                        <i class="material-icons prefix">dialpad</i>
+                        <input id="cedulaUsuario" name="cedulaUsuario" type="tel" class="validate" placeholder="Documento" autofocus="true" tabindex="1" pattern="([0-9]{6,10})" title="El numero de cedula debe ser minímo de 6 caracteres y maxímo de 10 carecteres" required="true" />
+                        <!--<label for="icon_telephone">Documento</label>-->
+
+                    </div>
+                    <div class="input-field col s6">
+                        <i class="material-icons prefix">account_circle</i>
+                        <input id="nombre" name="nombre" type="tel" class="validate" placeholder="Nombre"  tabindex="2"  pattern="[A-Z]{3,15}" title="Todos los caracteres deben ir en mayúscula, la cantidad de caracteres es de minimo3 y maximo 15" required="true" />
+                        <!--<label for="nombre">Nombre</label>-->
+                    </div>
+                    <div class="input-field col s6">
+                        <i class="material-icons prefix">account_circle</i>
+
+                        <input id="apellido" name="apellido" type="tel" class="validate" placeholder="Apellido" tabindex="3"   pattern="[A-Z]{3,15}" title="Todos los caracteres deben ir en mayúscula, la cantidad de caracteres es de minimo3 y maximo 15" required="true" />
+                        <!--<label for="apellido">Apellido</label>-->
+                    </div>
+
+                    <div class="input-field col s6">
+
+                        <i class="material-icons prefix">perm_contact_calenda</i>
+                        <input type="date" name="fecha" id="fecha" value="fecha" placeholder="Fecha de Nacimiento" required="true" />
+                        <!--<label for="icon_telephone">Fecha de Nacimiento</label>-->
+
+                    </div>
+                    <div class="input-field col s6">
+                        <i class="material-icons prefix">phone_android</i>
+                        <input id="telefono" name="telefono" type="tel" class="validate" placeholder="Teléfono"  tabindex="4" pattern="([3]{1})+([0,1,2]{1})+([0,1,2,3,4,5]{1})+([0-9]{7})" title="El numero de telefono debe ser de 10 carecteres" required="true" />
+                        <!--<label for="icon_telephone">Teléfono</label>-->
+                    </div>
+                    <div class="input-field col s6">
+                        <i class="material-icons prefix">email</i>
+                        <input id="correo" name="correo" type="tel" class="validate" placeholder="Correo" tabindex="5" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required="true" />
+                        <!--<label for="icon_telephone">Correo</label>-->
+                    </div>
+                    <div class="input-field col s6">
+                        <i class="material-icons prefix">vpn_key</i>
+                        <input id="contrasena" name="contrasena"  type="password" class="validate" placeholder="Contraseña" tabindex="6" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,50}" required="true" title="La contraseña debe ser mínima de 8 caracteres y se DEBE componer de mínimo un número, una letra mayúscula y letras minúsculas."/>
+                        <!--<label for="icon_telephone">Contraseña</label>-->
+                    </div>
+
+                    <div class="col s6">
+                        <button class="btn green waves-effect waves-light" name="action" style="width: 180px;" >
+                            <h:commandLink style="color: white;" value="Registrar" action="#{controladorUsuario.registrarUsuario()}" ></h:commandLink>
+                            <i class="material-icons right" style="color: white;" >send</i>
+                        </button>
+                        <br></br>
+                        <br></br>
+                        <h:commandLink action="#{controladorUsuario.ponerEstadoCero()}" actionListener="iniciarSesion.xhtml" class="btn orange waves-effect waves-light" style="width: 180px;" >Volver</h:commandLink>
+
+
+                        <br></br>
+                        <br></br>
+                        <a  href="registroVacante.xhtml" class="waves-effect waves-light btn blue" >Registrar como vacante  <i class="material-icons" style="color: white;" >trending_flat</i></a>
+                    </div>	
+
+                </h:form>
+
+
+
+            </div>
+        </div>
+
+
+
+
+
+
+        <!--formulario-->
+
+
+        <!--          Archvos js                  -->
+        <script src="materialize/js/jquery-2.2.1.min.js"></script>
+        <script src="materialize/js/materialize.min.js"></script>
+
+        <script>
+            $('#textarea1').val('New Text');
+            $('ul.tabs').tabs('select_tab', 'tab_id');
+            $('#textarea1').trigger('autoresize');
+            $('.datepicker').pickadate({
+                selectMonths: true, // Creates a dropdown to control month
+                selectYears: 15 // Creates a dropdown of 15 years to control year
+            });
+        </script>
+    </h:body>
+</html>
+

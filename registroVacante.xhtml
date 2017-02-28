@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>Registrar como vacante</title>
+
+        <link rel="icon" type="image/png" href="Resources/img/logoFavicon.ico"></link>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/><!--link iconos-->
+        <link rel="stylesheet" type="text/css" href="Resources/materialize/css/materialize.min.css"></link>
+        <link rel="stylesheet" type="text/css" href="Resources/estilosRegistro.css"></link>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link href="Resources/iconos.css" rel="stylesheet"/><!--link iconos-->
+        <link rel="stylesheet" type="text/css" href="Resources/materialize/css/materialize.min.css"></link>
+        <link rel="stylesheet" type="text/css" href="Resources/estilosRegistro.css" />
+
+    </h:head>
+    <h:body>
+        <div id="todo">
+            <br></br>
+            <div class="row">
+                <h:form class="col s12">
+                    <h2>Registro Vacante</h2>
+                    <div class="input-field col s6">
+                        <i class="material-icons prefix" style="color: black;" >dialpad</i>
+                        <input id="cedulaVacante" name="cedulaVacante" type="tel" class="validate"  placeholder="cedulaVacante" autofocus="true" tabindex="1" pattern="([0-9]{6,10})" title="El numero de cedula debe ser minímo de 6 caracteres y maxímo de 10 carecteres" required="true" />
+                        <!--<label for="icon_telephone">Documento</label>-->
+                    </div>
+
+                    <div class="input-field col s6">
+                        <i class="material-icons prefix" style="color: black;" >account_circle</i>
+                        <input id="nombreVacante"  name="nombreVacante" type="tel" class="validate" placeholder="Nombre"   tabindex="2"  pattern="[A-Z]{3,15}" title="Todos los caracteres deben ir en mayúscula, la cantidad de caracteres es de minimo3 y maximo 15" required="true" />
+                        <!--<label for="nombre">Nombre</label>-->
+                    </div>
+                    <div class="input-field col s6">
+                        <i class="material-icons prefix" style="color: black;" >account_circle</i>
+
+                        <input id="apellidoVacante" name="apellidoVacante" type="tel" class="validate" placeholder="Apellido" tabindex="3"   pattern="[A-Z]{3,15}" title="Todos los caracteres deben ir en mayúscula, la cantidad de caracteres es de minimo3 y maximo 15" required="true" />
+                        <!--<label for="apellido">Apellido</label>-->
+                    </div>
+                    <!--                    <div class="input-field col s6">
+                    
+                                            <i class="material-icons prefix">perm_contact_calenda</i>
+                                            <input type="date"  name="" class="datepicker"  placeholder="" />-->
+                    <!--<label for="icon_telephone">Fecha de Nacimiento</label>-->
+
+                    <!--</div>-->
+                    <div class="input-field col s6">
+                        <i class="material-icons prefix" style="color: black;" >phone_android</i>
+                        <input id="telefonoVacante" name="telefonoVacante" type="tel" class="validate"  placeholder="Teléfono"  tabindex="4" pattern="([3]{1})+([0,1,2]{1})+([0,1,2,3,4,5]{1})+([0-9]{7})" title="El numero de telefono debe ser de 10 carecteres" required="true" />
+                        <!--<label for="icon_telephone">Teléfono</label>-->
+                    </div>
+                    <div class="input-field col s6">
+                        <i class="material-icons prefix" style="color: black;" >email</i>
+                        <input id="correoVacante" name="correoVacante" type="tel" class="validate"  placeholder="Correo" tabindex="5" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required="true" />
+                        <!--<label for="icon_telephone">Correo</label>-->
+                    </div>
+                    <div class="input-field col s6">
+                        <i class="material-icons prefix" style="color: black;" >vpn_key</i>
+                        <input id="contrasenaVacante" name="contrasenaVacante" type="password" class="validate"  placeholder="Contraseña" tabindex="6" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,50}" required="true" title="La contraseña debe ser mínima de 8 caracteres y se DEBE componer de mínimo un número, una letra mayúscula y letras minúsculas."/>
+                        <!--<label for="icon_telephone">Contraseña</label>-->
+                    </div>
+
+                    <div class="input-field col s6">
+                        <i class="material-icons prefix" style="color: black;" >shopping_cart</i>
+
+                        <select class="icons" id="especialidad" name="especialidad" >
+                            <option value="" disabled="true" selected="true">Seleccione su especialidad</option>
+                            <option value="1" data-icon="img/tijeras.png" class="circle">Corte</option>
+                            <option value="2" data-icon="http://www.gustate.net/wp-content/uploads/2013/02/cuidados-cabello-te%C3%83%C2%B1ido1.png" class="circle">Tinte</option>
+                            <option value="3" data-icon="http://www.fitnessdeportes.com/wp-content/uploads/2010/02/RES389.jpg" class="circle">Cepillado</option>
+                            <option value="4" data-icon="https://i.ytimg.com/vi/34Z6qjlNYiY/hqdefault.jpg" class="circle">Manicure</option>
+                            <option value="5" data-icon="http://elementsestetica.com/wp-content/uploads/2015/11/Spa_Services_Menu-Nails_Shellac_Pedicure_Thumb_0.jpg" class="circle">Pedicure</option>
+                            <option value="6" data-icon="http://www.cositasfemeninas.com/wp-content/uploads/2016/03/11-secretos-de-belleza-que-tu-estilista-no-te-dir%C3%A1-650x491.jpg" class="circle">Integral</option>
+                        </select>
+                    </div>
+
+                    <div class="col s6">
+                        <h:commandButton value="Registrarse" action="#{controladorUsuario.registrarVacante()}"  class="btn btn-primary" />   
+
+
+                        <h:commandLink action="#{controladorUsuario.ponerEstadoCero()}" actionListener="iniciarSesion.xhtml" class="btn orange waves-effect waves-light" style="width: 180px;" >Volver</h:commandLink>
+
+                    </div>
+                </h:form>
+
+                <c:if test="#{controladorUsuario.estadoU==1}">
+                    Usuario registrado correctamente!!!
+                </c:if>
+
+                <c:if test="#{controladorUsuario.estadoU==2}">
+                    Error al registrado usuario!!!
+                </c:if>
+            </div>
+        </div>
+
+
+        <!--          Archvos js                  -->
+        <script src="Resources/materialize/js/jquery-2.2.1.min.js"></script>
+        <script src="Resources/materialize/js/materialize.min.js"></script>
+
+        <script>
+            $('#textarea1').val('New Text');
+            $('#textarea1').trigger('autoresize');
+            $('.datepicker').pickadate({
+                selectMonths: true, // Creates a dropdown to control month
+                selectYears: 15 // Creates a dropdown of 15 years to control year
+            });
+            $('select').material_select();
+        </script>
+    </h:body>
+</html>
+

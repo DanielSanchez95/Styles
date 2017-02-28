@@ -1,0 +1,221 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+
+        <link type="text/css" href="Resources/Utilerias/css/skitter.styles.css" media="all" rel="stylesheet" />
+        <meta charset="UTF-8" />
+        <title>Servicios</title>
+        <link rel="stylesheet" href="Resources/Utilerias/css/styleSesion.css" />
+        <!--<link rel="stylesheet" href="" />-->
+        <link rel="icon" type="image/png" href="Resources/Utilerias/img/logoFavicon.ico" />
+        <link rel="stylesheet" type="text/css" href="Resources/Utilerias/css/normalize.css" />
+        <link rel="stylesheet" type="text/css" href="Resources/Utilerias/css/demo.css" />
+        <link rel="stylesheet" type="text/css" href="Resources/Utilerias/css/component.css" />
+
+        <link rel="stylesheet" type="text/css" href="Resources/Utilerias/css/estilos.css" />
+        <link rel="stylesheet" type="text/css" href="Resources/Utilerias/css/font-awesome.css" />
+        <link rel="stylesheet" type="text/css" href="Resources/Utilerias/css/font-awesome.css" />
+
+        <script src="Resources/Utilerias/js/modernizr.custom.js"></script>
+
+
+        <!--<link rel="stylesheet" href="Resources/Semantic-UI-master/dist/semantic.css"/>-->
+        <style>
+            .ui.pink.table {/*Cabezera tabla*/
+                border-top: 0.2em solid #e03997;
+            }
+
+            .ui.table thead th {
+                cursor: auto;
+                background: #f9fafb;
+                text-align: inherit;
+                color: rgba(0, 0, 0, 0.87);
+                padding: 0.92857143em 0.71428571em;
+                vertical-align: inherit;
+                font-style: none;
+                font-weight: bold;
+                text-transform: none;
+                border-bottom: 1px solid rgba(34, 36, 38, 0.1);
+                border-left: none;
+            }
+
+            /*table {
+                border-collapse: collapse;
+                border-spacing: 0;
+            }
+            .ui.table {
+                width: 100%;
+                background: #ffffff;
+                margin: 1em 0em;
+                border: 1px solid rgba(34, 36, 38, 0.15);
+                box-shadow: none;
+                border-radius: 0.28571429rem;
+                text-align: left;
+                color: rgba(0, 0, 0, 0.87);
+                border-collapse: separate;
+                border-spacing: 0px;
+            }.ui.table {
+                font-size: 1em;
+            }.ui.table {
+                font-size: 1em;
+            }*/
+            .ui.table {
+                width: 100%;
+                background: #ffffff;
+                margin: 1em 0em;
+                border: 1px solid rgba(34, 36, 38, 0.15);
+                box-shadow: none;
+                border-radius: 0.28571429rem;
+                text-align: left;
+                color: rgba(0, 0, 0, 0.87);
+                border-collapse: separate;
+                border-spacing: 0px;
+            }tbody {
+                display: table-row-group;
+                vertical-align: middle;
+                border-color: inherit;
+                border-top-color: inherit;
+                border-right-color: inherit;
+                border-bottom-color: inherit;
+                border-left-color: inherit;
+
+
+            }
+        </style>
+    </h:head>
+    <h:body>
+
+        <header>
+            <img id="logo" src="Resources/Utilerias/img/logo2.png" />
+        </header>
+        <div id="info" style="color:#ffffff">
+            <h4>
+                <script>
+                    var meses = new Array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre");
+                    var diasSemana = new Array("Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado");
+                    var f = new Date();
+                    document.write(diasSemana[f.getDay()] + ", " + f.getDate() + " de " + meses[f.getMonth()] + " de " + f.getFullYear());
+                </script>
+            </h4>
+        </div>
+        <section id="migaDePan">Usted está aquí: Inicio</section>
+        <section class="color-9">
+            <nav class="cl-effect-9">
+                <a href="index.xhtml?faces-redirect=true"><span>Inicio</span><span>Style System</span></a>
+                <a href="quienesSomos.xhtml?faces-redirect=true"><span>¿Quiénes somos?</span><span>Esperanza Sala de Belleza</span></a>
+                <a href="servicios.xhtml?faces-redirect=true"><span>Servicios</span><span>Sala de Belleza</span></a>
+                <a href="contactenos.xhtml?faces-redirect=true"><span>Contáctenos</span><span>Sala de Belleza</span></a>
+                <a href="iniciarSesion.xhtml?faces-redirect=true"><span>Iniciar Sesión</span><span>Sala de Belleza</span></a>
+            </nav>
+        </section>
+
+        <!-- ****************************************** -->
+
+        <div class="contenedor" style="color: black;">
+
+
+            <f:view>
+
+
+                <h:form id="formularioServic">
+                    <h1><h:outputText value="Lista servicios"/></h1>
+                    <div class="CSSTableGenerator" >
+                        <h:dataTable value="#{controladorServicio.listaServicio()}" var="item" >
+                            
+                            <h:column>
+                                <f:facet name="header">
+                                    <!--<h:outputText value="Nombre servicio"/>-->
+                                </f:facet>
+                                <h:outputText value="#{item.nombreServicio}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <!--<h:outputText value="Precio"/>-->
+                                </f:facet>
+                                <h:outputText value="$#{item.precio}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <!--<h:outputText value="Duración"/>-->
+                                </f:facet>
+                                <h:outputText value="#{item.duracion} min."/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <!--<h:outputText value="Producto"/>-->
+                                </f:facet>
+                                <h:outputText value="#{item.producto}"/>
+                            </h:column>
+                        </h:dataTable>
+                    </div>
+                </h:form>
+            </f:view>
+
+        </div>
+
+        
+        <!--****************************************************************-->        
+
+        <div id="contenedor1">
+            <div id="PanelDerechoServicios">
+                <h2>Servicios</h2>
+                <h4>
+                    <li>Manicure</li>
+                    <li>Pedicure</li>
+                    <li>Cortes</li>
+                    <li>Peinados</li>
+                    <li>Maquillaje</li>
+
+                </h4>
+                <a href="faces/servicios.xhtml?faces-redirect=true"><h4>Leer más...</h4></a>
+            </div>
+            <div id="PanelCentralServicios">
+                <h2>Tratamientos</h2>
+                <H4>
+                    <li>Restauración molecular</li>
+                    <li>Contra la seborrea</li>
+                    <li>Contra la epitiliasis</li>
+                    <li>Anti-caída del cabello</li>
+                </H4>
+                <a href="faces/servicios.xhtml?faces-redirect=true"><h4>Leer más...</h4></a>
+            </div>
+            <div id="PanelIzquierdoServicios">
+                <h2>Ubicación</h2>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3976.5335344040072!2d-74.07871290000004!3d4.676909100000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e3f9b1d344b3b57%3A0x879b8f7966d6a944!2sCra.+62+%2376-24%2C+Bogot%C3%A1!5e0!3m2!1ses!2sco!4v1434462912440" width="550" height="210" frameborder="0" style="border:0"></iframe>
+            </div>
+        </div>
+
+
+        <footer>
+            <div id="footerIzquierdo"><p>Esperanza Sala de Belleza | Tel: 301 511 32 42 | Dirección: Carrera 62 # 76-24 | Barrio: Simón Bolívar</p></div>
+            <div id="footerDerecho"> 
+                <!--    <ul class="authorsocial">
+                        <li><a href="http://twitter.com" target="_blank" class="socialdark twitter"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="http://facebook.com" target="_blank" class="socialdark facebook"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="https://instagram.com" target="_blank" class="socialdark instagram"><i class="fa fa-instagram"></i></a></li>
+                    </ul>-->
+            </div>
+        </footer>
+
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script type="text/javascript" src="Resources/Utilerias/js/jquery.easing.1.3.js"></script>
+        <script type="text/javascript" src="Resources/Utilerias/js/jquery.animate-colors-min.js"></script>
+        <script type="text/javascript" src="Resources/Utilerias/js/jquery.skitter.min.js"></script>
+        <link rel="stylesheet" href="Resources/Utilerias/css/flexslider.css" />
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+        <script type="text/javascript" src="Resources/Utilerias/js/jquery.flexslider-min.js"></script>
+        <script type="text/javascript" charset="utf-8">
+                    $(window).load(function () {
+                        $('.flexslider').flexslider({
+                            controlsContainer: '.flex-container'
+                        });
+                    });
+        </script>
+
+    </h:body>
+</html>
+
