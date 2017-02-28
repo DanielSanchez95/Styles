@@ -1,0 +1,136 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+
+        <link rel="stylesheet" href="../Resources/Utilerias/css/bootstrap.css"/>
+        <link rel="stylesheet" href="../Resources/Utilerias/css/font-awesome.css"/>
+        <link rel="stylesheet" href="../Resources/Semantic-UI-master/dist/semantic.css"/>
+        <link rel="stylesheet" href="../Resources/Metro-UI-CSS-master/docs/css/metro.css"/>
+        <link rel="stylesheet" href="../Resources/Metro-UI-CSS-master/docs/css/metro-icons.css"/>
+        <link rel="stylesheet" href="../Resources/Metro-UI-CSS-master/docs/css/metro-responsive.css"/>
+        <link rel="stylesheet" href="../Resources/Metro-UI-CSS-master/docs/css/metro-schemes.css"/>
+        <link rel="stylesheet" href="../Resources/Metro-UI-CSS-master/docs/css/docs.css"/>
+
+        <link rel="stylesheet" href="../Resources/Utilerias/css/estilosCliente.css"/>
+
+
+
+
+        <script src="../Resources/Metro-UI-CSS-master/docs/js/jquery-2.1.3.min.js"></script>
+        <script src="../Resources/Utilerias/js/bootstrap.js"></script>
+        <script src="../Resources/Metro-UI-CSS-master/build/js/metro.js"></script>
+        <script src="../Resources/Metro-UI-CSS-master/docs/js/docs.js"></script>
+        <script src="../Resources/Semantic-UI-master/dist/semantic.js"></script>
+        <script src="../Resources/Metro-UI-CSS-master/docs/js/ga.js"></script>
+
+
+        <f:event listener="#{controladorUsuario.verificarSesion()}" type="preRenderView"></f:event>
+
+    </h:head>
+    <h:body>
+        <div class="contenedor">
+
+            <table class="ui red table">
+                <thead>
+                    <tr>
+                        <th>Servicio</th>
+                        <th>Fecha</th>
+                        <th>Estilista</th>
+                        <th>Duracion</th>
+                        <th>Opciones</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <c:forEach items="#{controladorUsuario.reservasCliente}" var="lista">
+                        <tr>
+                            <td>
+                                <table>
+                                    <tbody>
+                                        <c:forEach items="#{controladorUsuario.traerNombreServicio(lista.idReserva)}" var="reserva">
+                                            <tr>
+                                                <td>#{reserva.idServicio.nombreServicio}</td>
+                                            </tr>
+                                        </c:forEach>
+                                    </tbody>
+                                </table>
+                            </td>	
+                            <td>#{lista.idReserva.fechaYHora.toLocaleString()}</td>
+                            <td>#{lista.idEstilista.usuario.nombreUsuario}</td>
+                            <td>30min</td>
+                            <td>
+                                <c:if test="#{(lista.idReserva.estado)== 'Pendiente'}">
+                                    <h:form>
+                                        <h:commandButton value="Confirmar" class="ui green button" action="#{controladorUsuario.cancelarReserva(lista.idEstilistaReserva)}"></h:commandButton>
+                                    </h:form>
+                                    <!--<button class="ui red button" data-toggle="modal" data-target="#myCancelar{lista.idEstilistaReserva}">Cancelar</button>-->
+                                </c:if>
+                            </td>
+
+                        </tr>
+
+
+                        <!--<div class="modal fade" id="myCancelar{lista.idEstilistaReserva}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <h:form>
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"></span></button>
+                                            <h4 class="modal-title" id="myModalLabel">Cancela tu reserva</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            ¿Estas seguro de cancelar tu reserva?
+                                        </div>
+                                        <div class="modal-footer">
+
+                                            <button type="button" class="ui red button" data-dismiss="modal">Cancelar</button>
+                                            <h:commandButton value="Confirmar" class="ui green button" action="{controladorUsuario.cancelarReserva(lista)}"></h:commandButton>
+                                        </div>
+                                    </h:form> 
+                                </div>
+                            </div>
+                        </div>-->
+
+                    </c:forEach>
+
+
+                </tbody>
+            </table>
+
+            <c:if test="#{controladorUsuario.estadoAlerta == 4}">
+                <div class="alert alert-success" style="text-align: center">Tu reserva se ha cancelado con exito</div>
+            </c:if>
+            <c:if test="#{controladorUsuario.estadoAlerta == 5}">
+                <div class="alert alert-info" style="text-align: center">No se puede cancelar la recerva faltando 24 horas</div>
+            </c:if>
+
+        </div>    
+        <script type="text/javascript">
+
+            $('.ui.dropdown').dropdown();
+            $('.ui.accordion').accordion();
+
+            var clic = 1;
+            function mostrar() {
+
+                if (clic == 1) {
+                    document.getElementById('menu').style.display = 'none';
+
+                    clic = clic + 1;
+                } else {
+                    document.getElementById('menu').style.display = 'block';
+                    clic = 1;
+                }
+
+            }
+
+
+        </script>
+    </h:body>
+</html>
+

@@ -1,0 +1,357 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+    <h:head>
+        <title>Nueva Cita +</title>
+        <link rel="icon" type="image/png" href="../Estilos/img/logoFavicon.ico" />
+
+        <link rel="stylesheet" href="../../Estilos/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous" />
+        <link rel="stylesheet" href="../../Estilos/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous" />
+        <link rel="stylesheet" href="../../Estilos/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous" /> 
+        <link rel="stylesheet" href="../../Estilos/css/bootstrap3.min.css" />
+
+        <link rel="stylesheet" href="../../Estilos/css/xcss" /> 
+        <link rel="stylesheet" href="../../Estilos/css/jquery-ui.min.css" />
+        <link rel="stylesheet" href="../../Estilos/css/font-awesome.min.css" />
+        <link rel="stylesheet" href="../../Estilos/css/animate.min.css" />
+        <link rel="stylesheet" href="../../Estilos/css/estilosCliente.css" />
+        <link rel="stylesheet" href="../../Estilos/css/style-responsive.min.css" />
+        <link rel="stylesheet" href="../../Estilos/css/defaultCliente.css" id="theme" />
+        <link rel="stylesheet" href="../../Estilos/css/jquery-jvectormap-1.2.2.css" />
+        <link rel="stylesheet" href="../../Estilos/css/bootstrap_calendar.css" />
+        <link rel="stylesheet" href="../../Estilos/css/jquery.gritter.css" />
+        <link rel="stylesheet" href="../../Estilos/css/morris.css" />
+
+        <script src="../../Estilos/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+        <script async="" src="../../Estilos/js/analytics.js"></script>
+        <script src="../../Estilos/js/pace.min.js"></script>
+        <style type="text/css"></style>
+
+
+
+        <f:event listener="#{controladorUsuario.verificarSesion2()}" type="preRenderView"></f:event>
+
+        <link href="../resources/css/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../resources/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../resources/css/formValidation.css" rel="stylesheet" type="text/css"/>
+
+        <script src="../resources/js/jquery-1.11.1.js" type="text/javascript"></script>
+        <script src="../resources/js/bootstrap-datepicker.es.min.js" type="text/javascript"></script>
+        <script src="../resources/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
+        <script src="../resources/js/formValidation.min.js" type="text/javascript"></script>
+        <script>
+            $().ready(function () {
+                $('#fechaReserva').datepicker({
+                    language: 'es',
+                    format: 'yyyy-mm-dd',
+                    multidateSeparator: '/',
+                    startView: 0, //si inicia mostrando el dia (0), mes (1), año (2)
+                    startDate: '+1d', //fecha inicial habilitada: hoy
+                    endDate: '+2m', //fecha final habilitada: 1 mes adelante
+                    todayHighlight: true, //señalar el día actual
+                    //daysOfWeekDisabled: '0,0', //deshabilitar días 0-sabado, 1-lunes... etc
+                    autoclose: true, //autocerrar al perder el foco en el input
+                    //defaultViewDate: {year: 2015} //Si se desea parametrizar una fecha por defecto
+                });
+
+                //Dos llamados al metodo de revalidar, cuando cambia (change) o cuando pierde foco (blur)
+                $('#fechaReserva').change(function () {
+                    $('#formConfirmarRegistro').formValidation('revalidateField', 'fechaReserva');
+                });
+                $('#fechaReserva').blur(function () {
+                    $('#formConfirmarRegistro').formValidation('revalidateField', 'fechaReserva');
+                });
+
+                //métodos de validacion del otro plugin formvalidation
+                $('#formConfirmarRegistro').formValidation({// Validación datos capa cliente. TENER PRESENTE EL ID DEL FORM
+                    err: {container: 'tooltip'}, //muestra en tooltips
+                    icon: {valid: 'fa fa-check-circle', invalid: 'fa fa-times-circle', validating: 'fa fa-refresh'}, //iconos
+                    locale: 'es_ES', //idioma - debe enlazar el archivo "es_ES.js"
+                    fields: {
+                        fechaReserva: {
+                            row: '.form-group',
+                            message: 'Introduce una fecha válida con formato dd/mm/aaaa',
+                            validators: {
+                                notEmpty: {},
+                                date: {
+                                    format: 'YYY-MM-DD', // Muy importante hacer coincidir este formato, con el del DATEPICKER *******
+                                    separator: '/'
+                                }
+                            }
+                        }
+                    }
+                });
+            });
+        </script>
+
+        <f:event listener="#{controladorUsuario.verificarSesion()}" type="preRenderView"></f:event>
+
+    </h:head>
+
+    <h:body class="marcaguaA">
+
+
+        <div class="pace  pace-inactive"><div class="pace-progress" data-progress-text="100%" data-progress="99" style="width: 100%;">
+                <div class="pace-progress-inner"></div>
+            </div>
+            <div class="pace-activity"></div></div>
+        <!-- begin #page-loader -->
+        <div id="page-loader" class="fade in hide"><span class="spinner"></span></div>
+        <!-- end #page-loader -->
+
+        <!-- begin #page-container -->
+        <div id="page-container" class="fade page-sidebar-fixed page-header-fixed in" style="bakground:#000"> 
+
+            <!-- begin #header -->
+            <div id="header" class="header navbar navbar-default navbar-fixed-top">
+                <!-- begin container-fluid -->
+                <div class="container-fluid">
+                    <!-- begin mobile sidebar expand / collapse button -->
+
+                    <!-- end mobile sidebar expand / collapse button -->
+
+                    <!-- begin header navigation right -->
+                    <ul class="nav navbar-nav navbar-right">
+
+                        <li class="dropdown navbar-user">
+
+                            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+
+                                <c:if test="#{controladorUsuario.usuarioLogin.sexo == 'M'}" >
+                                    <img src="../../Estilos/img/perfiles/mark.png" alt="" /> 
+                                </c:if>
+
+                                <c:if test="#{controladorUsuario.usuarioLogin.sexo == 'F'}" >
+                                    <img src="../../Estilos/img/perfiles/lindsay.png" alt="" /> 
+                                </c:if>
+                                <span class="hidden-xs">#{controladorUsuario.usuarioLogin.nombreUsuario}  #{controladorUsuario.usuarioLogin.apellidoUsuario}</span> <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu animated fadeInLeft">
+                                <li class="arrow"></li>
+                                <!--<li><a href="javascript:;">Edit Profile</a></li>
+                                <li><a href="javascript:;"><span class="badge badge-danger pull-right">2</span> Inbox</a></li>
+                                <li><a href="javascript:;">Calendar</a></li>
+                                <li><a href="javascript:;">Setting</a></li>-->
+                                <li class="divider"></li>
+                                <li style="color: black;">
+                                    <a href="javascript:;">
+                                        <h:form>
+                                            <h:commandLink action="#{controladorUsuario.logout2()}" style="color: black;" >
+                                                Cerrar sesión
+                                            </h:commandLink>
+                                        </h:form>
+
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <!-- end header navigation right -->
+                </div>
+                <!-- end container-fluid -->
+            </div>
+            <!-- end #header -->
+
+            <!-- begin #sidebar -->
+            <div id="sidebar" class="sidebar">
+                <!-- begin sidebar scrollbar -->
+                <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 100%;"><div data-scrollbar="true" data-height="100%" style="overflow: hidden; width: auto; height: 100%;" data-init="true">
+                        <!-- begin sidebar user -->
+                        <ul class="nav">
+                            <li class="nav-profile">
+                                <div class="image">
+                                    <a href="javascript:;">
+                                        <img src="../../Estilos/img/Style.jpg" />
+                                    </a>
+                                </div>
+                                <div class="info">
+                                    <b>STYLE</b>
+                                    <small>Sistema de Información</small>
+                                </div>
+                            </li>
+                        </ul>
+                        <!-- end sidebar user -->
+                        <!-- begin sidebar nav -->
+                        <ul class="nav">
+
+                            <li class="nav-header"></li>
+                            <li class="has sub active">
+                                <a href="../indexCliente.xhtml">
+                                    <i class="fa fa-home"></i>
+                                    <span>Inicio</span>
+                                </a>
+                            </li>
+                            <li class="has sub">
+                                <a href="../servicios.xhtml">
+                                    <i class="fa fa-scissors"></i>
+                                    <span>Servicios</span>
+                                </a>
+                            </li>
+                            <li class="has-sub">
+                                <a href="javascript:;">
+                                    <b class="caret pull-right"></b>
+                                    <i class="fa fa-star"></i>
+                                    <span>Reservas</span>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="../misreservas.xhtml">Mis reservas</a></li>
+                                </ul>
+                            </li>
+                            <li class="has sub">
+                                <a href="../estilistas.xhtml">
+                                    <i class="fa fa-users"></i>
+                                    <span>Estilistas</span>
+                                </a>
+                            </li>
+
+                            <!-- begin sidebar minify button -->
+                            <li><a href="javascript:;" class="sidebar-minify-btn" data-click="sidebar-minify"><i class="fa fa-angle-double-left"></i></a></li>
+                            <!-- end sidebar minify button -->
+                        </ul>
+                        <!-- end sidebar nav -->
+                    </div><div class="slimScrollBar ui-draggable" style="width: 7px; position: absolute; top: 207px; opacity: 0.4; display: block; border-radius: 7px; z-index: 99; right: 1px; height: 292.255px; background: rgb(0, 0, 0);"></div><div class="slimScrollRail" style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; opacity: 0.2; z-index: 90; right: 1px; background: rgb(51, 51, 51);"></div></div>
+                <!-- end sidebar scrollbar -->
+            </div>
+            <div class="sidebar-bg"></div>
+            <!-- end #sidebar -->
+
+
+            <!-- begin scroll to top btn -->
+            <a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
+            <!-- end scroll to top btn -->
+        </div>
+        <!-- end page container -->
+
+        <!-- ================== BEGIN BASE JS ================== -->
+        <script type="text/javascript" src="../Estilos/js/jquery-1.9.1.min.js"></script>
+        <script type="text/javascript" src="../../Estilos/js/jquery-migrate-1.1.0.min.js"></script>
+        <script type="text/javascript" src="../Estilos/js/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="../../Estilos/js/bootstrap.min.js"></script>
+
+        <script type="text/javascript" src="../Estilos/js/jquery.slimscroll.min.js"></script>
+        <script type="text/javascript" src="../Estilos/js/jquery.cookie.js"></script>
+        <!-- ================== END BASE JS ================== -->
+
+        <!-- ================== BEGIN PAGE LEVEL JS ================== -->
+        <script type="text/javascript" src="../../Estilos/js/raphael.min.js"></script>
+        <script type="text/javascript" src="../../Estilos/js/morris.js"></script>
+        <script type="text/javascript" src="../../Estilos/js/jquery-jvectormap-1.2.2.min.js"></script>
+        <script type="text/javascript" src="../../Estilos/js/jquery-jvectormap-world-merc-en.js"></script>
+        <script type="text/javascript" src="../../Estilos/js/bootstrap_calendar.min.js"></script>
+        <script type="text/javascript" src="../../Estilos/js/jquery.gritter.js"></script>
+        <script type="text/javascript" src="../../Estilos/js/dashboard-v2.min.js"></script>
+        <script type="text/javascript" src="../../Estilos/js/apps.min.js"></script>
+        <!-- ================== END PAGE LEVEL JS ================== -->
+
+        <script>
+            $(document).ready(function () {
+                App.init();
+                DashboardV2.init();
+            });
+        </script>
+        <script>
+            (function (i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r;
+                i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+                a = s.createElement(o),
+                        m = s.getElementsByTagName(o)[0];
+                a.async = 1;
+                a.src = g;
+                m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+            ga('create', 'UA-53034621-1', 'auto');
+            ga('send', 'pageview');
+
+        </script>
+
+
+        <div class="jvectormap-label" style="display: none; left: 1029px; top: 280px;">Greenland</div>
+
+        <center>
+
+            <div id="tabla">
+                <center><h1><h:outputText value="Crear reserva"/></h1></center>
+                <c:if test="#{controladorUsuario.estadoAlerta ==3}">
+                    <div class="alert alert-success alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        La reserva fue creada correctamente.
+                    </div>
+                </c:if>
+                <c:if test="#{controladorUsuario.estadoAlerta ==4}">
+                    <div class="alert alert-danger alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        La reserva no pudo ser creada correctamente.
+                    </div>
+                </c:if>
+                <h:form  class="form-horizontal">
+                    <fieldset>
+
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="selectbasic"></label>
+                            <div class="col-md-4">
+
+                                <select  name="servicio" id="servicio" class="form-control"  >
+                                    <option value="" disabled="true" selected="true" >Seleccione el servicio</option>
+                                    <c:forEach items="#{controladorEstilista.listarEstilistaServicio()}" var="lista">
+                                        <option value="#{lista.idServicio.idServicio}-#{lista.idEstilista.cedulaEstilista}"  >#{lista.idServicio.nombreServicio} #{lista.idEstilista.usuario.nombreUsuario} #{lista.idEstilista.usuario.apellidoUsuario} </option>
+                                    </c:forEach> 
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="textinput"></label>  
+                                <div class="col-md-4">
+                                    <input type="text" id="fechaReserva" name="fechaReserva" style="color: black;"
+                                           class="form-control 5" placeholder="Seleccione una fecha válida"  tabindex="10" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="hora"></label>
+                            <div class="col-md-4">
+
+                                <select id="hora" name="hora" class="form-control" required="" >
+                                    <option value=" 08:00" label="08 : 00 AM"></option>
+                                    <option value=" 09:00" label="09 : 00 AM"></option>
+                                    <option value=" 10:00" label="10 : 00 AM"></option>
+                                    <option value=" 11:00" label="11 : 00 AM"></option>
+                                    <option value=" 12:00" label="12 : 00 PM"></option>
+                                    <option value=" 13:00" label="01 : 00 PM"></option>
+                                    <option value=" 14:00" label="02 : 00 PM"></option>
+                                    <option value=" 15:00" label="03 : 00 PM"></option>
+                                    <option value=" 16:00" label="04 : 00 PM"></option>
+                                    <option value=" 17:00" label="05 : 00 PM"></option>
+                                    <option value=" 18:00" label="06 : 00 PM"></option>
+                                    <option value=" 19:00" label="07 : 00 PM"></option>
+                                    <option value=" 20:00" label="08 : 00 PM"></option>
+                                </select>
+                            </div>
+                        </div>
+
+
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <h:commandButton class="ui green button" action="#{controladorUsuario.crearReserva()}" value="Reservar"></h:commandButton>
+                        <button class="ui red button"><a href="../misreservas.xhtml"></a>Cancelar</button>
+
+
+                    </fieldset>
+                </h:form>
+            </div>
+        </center>
+    </h:body>
+</html>
+
